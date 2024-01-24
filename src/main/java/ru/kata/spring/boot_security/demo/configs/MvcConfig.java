@@ -10,3 +10,9 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/user").setViewName("user");
     }
 }
+/*
+   - registry.addViewController("/user") - определяет URL-путь "/user".
+   - .setViewName("user") - указывает на имя представления (view) "user".
+   Когда пользователь обращается к URL-пути "/user",
+   будет отображено представление с именем "user".
+ */

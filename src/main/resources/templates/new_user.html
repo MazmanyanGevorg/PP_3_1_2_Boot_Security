@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>New User</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+          rel="stylesheet"
+          integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM"
+          crossorigin="anonymous">
+</head>
+<body>
+<div align="center">
+    <h2>New User</h2>
+<!--    <form action="#" th:action="@{/register}" method="post" th:object="${userForm}">-->
+    <form action="#" th:action="@{/register}" th:method="post" th:object="${user}">
+        <table border="0" cellpadding="5">
+            <tr>
+                <td>Username:</td>
+                <td>
+                    <label>
+                        <input placeholder="Username" type="text" th:field="*{username}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Name:</td>
+                <td>
+                    <label>
+                        <input placeholder="Name" type="text" th:field="*{name}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Surname:</td>
+                <td>
+                    <label>
+                        <input placeholder="Surname" type="text" th:field="*{surname}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Age:</td>
+                <td>
+                    <label>
+                        <input placeholder="Age" type="text" th:field="*{age}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Level:</td>
+                <td>
+                    <label>
+                        <input placeholder="level" type="text" th:field="*{level}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Points:</td>
+                <td>
+                    <label>
+                        <input placeholder="points" type="text" th:field="*{points}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Password:</td>
+                <td>
+                    <label>
+                        <input placeholder="password" type="text" th:field="*{password}"/>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>Role:</td>
+                <td>
+                    <label>
+<!--                        <input placeholder="roles" type="text" th:field="*{roles}"/>-->
+                        <span th:each="role: ${user.roles}" th:text="${role.name} + ', '"></span>
+                    </label>
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <input type="submit" value="Save"
+                           onclick="window.location.href = '/user'"/>
+                </td>
+                <td>
+                    <input type="button" value="Back"
+                           onclick="window.location.href = '/'"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    <br>
+    <br>
+</div>
+</body>
+</html>
+
+<!--регистрация-->
+<!--<!DOCTYPE html>-->
+<!--<html xmlns:th="http://www.thymeleaf.org" lang="en">-->
+<!--<head>-->
+<!--    <meta charset="utf-8">-->
+<!--    <title>Регистрация</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div>-->
+<!--    <form action="#" th:action="@{/register}" method="post" th:object="${userForm}">-->
+<!--        <h2>Регистрация</h2>-->
+<!--        <div>-->
+<!--            <input type="text" th:field="*{username}" placeholder="Username" autofocus="true">-->
+<!--            <p th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></p>-->
+<!--            <p th:text="${usernameError}"></p>-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input type="password" th:field="*{password}" placeholder="Password">-->
+<!--        </div>-->
+<!--        <div>-->
+<!--            <input type="password" th:field="*{passwordConfirm}" placeholder="Confirm your password">-->
+<!--            <p th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></p>-->
+<!--            <p th:text="${passwordError}"></p>-->
+<!--        </div>-->
+<!--        <button type="submit">Зарегистрироваться</button>-->
+<!--    </form>-->
+<!--    <a href="/">Главная</a>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
