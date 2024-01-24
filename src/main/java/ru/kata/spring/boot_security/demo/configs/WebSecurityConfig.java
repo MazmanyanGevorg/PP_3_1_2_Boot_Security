@@ -42,13 +42,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
-                .loginPage("/")
+                .loginPage("/user")
+                .defaultSuccessUrl("/user", true)
                 .successHandler(successUserHandler) //настраивает форму входа в систему,
                 // указывает successUserHandler в качестве обработчика успешной аутентификации
                 .permitAll()// и разрешает доступ к форме входа всем пользователям
                 .and()
                 .logout()
                 .logoutSuccessUrl("/")
+                .deleteCookies("JSESSIONID")
                 .permitAll();
     }
 
@@ -75,13 +77,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 для обработки аутентификации пользователей.
      */
 
-    //    @Bean
-//    public DaoAuthenticationProvider daoAuthenticationProvider(UserDetailsService userDetailsService) {
-//        DaoAuthenticationProvider daoAuthenticationProvider = new DaoAuthenticationProvider();
-//        daoAuthenticationProvider.setPasswordEncoder(passwordEncoder());
-//        daoAuthenticationProvider.setUserDetailsService(userDetailsService);
-//        return daoAuthenticationProvider;
-//    }
     @Autowired
     protected void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
@@ -158,6 +153,4 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 //
 //        return jdbcUserDetailsManager;
 //    }
-
-    //
 }

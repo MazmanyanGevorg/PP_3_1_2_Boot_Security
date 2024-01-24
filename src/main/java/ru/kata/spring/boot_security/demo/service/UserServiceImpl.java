@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class UserServiceImpl implements UserService, UserDetailsService {
 
     UserRepository userRepository;
@@ -66,6 +66,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void updateUser(User user) {
         userDAO.updateUser(user);
     }
+
     public boolean saveUser(User user) {
         User userFromDB = userRepository.findByName(user.getName());
         if (userFromDB != null) {

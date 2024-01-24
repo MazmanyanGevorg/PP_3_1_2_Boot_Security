@@ -6,16 +6,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import java.util.Set;
 
 
@@ -68,7 +65,7 @@ public class User implements UserDetails {
 //    @ManyToMany(fetch = FetchType.EAGER)
 //    private Set<Role> roles;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
@@ -96,13 +93,14 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() { // возвращает список ролей одного пользователя
-        Set<Role> roles = this.getRoles();
-        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-
-        for (Role role : roles) {
-            authorities.add(new SimpleGrantedAuthority(role.getName()));
-        }
-        return authorities;
+//        Set<Role> roles = this.getRoles();
+//        List<SimpleGrantedAuthority> authorities = new ArrayList<>();
+//
+//        for (Role role : roles) {
+//            authorities.add(new SimpleGrantedAuthority(role.getName()));
+//        }
+//        return authorities;
+        return getRoles();
     }
     /*
     Этот метод в Spring Security используется для получения

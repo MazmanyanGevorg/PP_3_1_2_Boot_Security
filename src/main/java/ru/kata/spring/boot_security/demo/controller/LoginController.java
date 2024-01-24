@@ -6,9 +6,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import ru.kata.spring.boot_security.demo.model.User;
-import ru.kata.spring.boot_security.demo.service.UserService;
 import ru.kata.spring.boot_security.demo.service.UserServiceImpl;
 
 import javax.validation.Valid;
@@ -21,18 +19,23 @@ public class LoginController {
     public LoginController(UserServiceImpl userService) {
         this.userService = userService;
     }
+
+    ////////////////////////////////Главная страница//////////////////////////////
+
     @GetMapping("")
     public String welcomeToLogin() {
         return "/index";
     }
 
+    ////////////////////////////////Страница регистрации//////////////////////////////
+
     @GetMapping("/registration")
-    public String registration(@ModelAttribute("user") User user) {
+    public String getNewUserForm(@ModelAttribute("user") User user) {
         return "/new_user";
     }
 
     @PostMapping("/registration")
-    public String addUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
+    public String addNewUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult, Model model) {
 
         if (bindingResult.hasErrors()) {
             return "/new_user";
@@ -43,7 +46,9 @@ public class LoginController {
             return "/new_user";
         }
 
-        return "redirect:/";
+        return "redirect:/user";
     }
+
+
 
 }
